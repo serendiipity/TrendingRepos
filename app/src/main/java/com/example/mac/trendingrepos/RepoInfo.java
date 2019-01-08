@@ -1,12 +1,12 @@
 package com.example.mac.trendingrepos;
 
 public class RepoInfo {
-    String name;
-    String owner;
-    int stars;
-    String description;
+    private String name;
+    private String owner;
+    private String stars;
+    private String description;
 
-    public RepoInfo(String name, String owner, String description, int stars) {
+    public RepoInfo(String name, String owner, String description, String stars) {
         this.name = name;
         this.owner = owner;
         this.description = description;
@@ -21,7 +21,7 @@ public class RepoInfo {
         return owner;
     }
 
-    public int getStars() {
+    public String getStars() {
         return stars;
     }
 

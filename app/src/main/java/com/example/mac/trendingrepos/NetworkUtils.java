@@ -1,7 +1,6 @@
 package com.example.mac.trendingrepos;
 
 import android.net.Uri;
-import android.util.Log;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -12,7 +11,6 @@ import java.util.Calendar;
 
 public class NetworkUtils {
 
-    private static final String LOG_TAG = NetworkUtils.class.getSimpleName();
     private static final String BASE_URL = "https://api.github.com/search/repositories?";
     private static final String QUERY_PARAM = "q";
     private static final String SORT = "sort";
@@ -38,19 +36,21 @@ public class NetworkUtils {
             urlConnection = (HttpURLConnection) requestURL.openConnection();
             urlConnection.setRequestMethod("GET");
             urlConnection.connect();
-            if (requestURL != null)
-                Log.d(LOG_TAG, "printing this " + requestURL.toString());
+
             InputStream inputStream = urlConnection.getInputStream();
             reader = new BufferedReader(new InputStreamReader(inputStream));
             StringBuilder builder = new StringBuilder();
             String line;
+
             while ((line = reader.readLine()) != null) {
                 builder.append(line);
                 builder.append("\n");
             }
+
             if (builder.length() == 0) {
                 return null;
             }
+
             reposJSONString = builder.toString();
         } catch (IOException e) {
             e.printStackTrace();
@@ -67,11 +67,7 @@ public class NetworkUtils {
             }
         }
 
-        if (reposJSONString != null)
-            Log.d(LOG_TAG, "printed repos " + reposJSONString);
-
         return reposJSONString;
-
     }
 
     public static String getFormattedDate() {
@@ -95,5 +91,4 @@ public class NetworkUtils {
 
         return date;
     }
-
 }
