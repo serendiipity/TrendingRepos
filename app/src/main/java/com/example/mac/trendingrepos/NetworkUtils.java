@@ -1,6 +1,8 @@
 package com.example.mac.trendingrepos;
 
 import android.net.Uri;
+import android.util.Log;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -16,6 +18,7 @@ public class NetworkUtils {
     private static final String SORT = "sort";
     private static final String ORDER = "order";
     private static final String PAGE = "page";
+    private static int currentPage = 1;
 
     static String getReposInfo() {
 
@@ -29,7 +32,7 @@ public class NetworkUtils {
                     .appendQueryParameter(QUERY_PARAM, "created:>" + date)
                     .appendQueryParameter(SORT, "stars")
                     .appendQueryParameter(ORDER, "desc")
-                    .appendQueryParameter(PAGE, "1") // TODO: multiple pages
+                    .appendQueryParameter(PAGE, Integer.toString(currentPage))
                     .build();
 
             URL requestURL = new URL(builtURI.toString());
@@ -52,6 +55,7 @@ public class NetworkUtils {
             }
 
             reposJSONString = builder.toString();
+            currentPage++;
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
@@ -73,8 +77,8 @@ public class NetworkUtils {
     public static String getFormattedDate() {
         Calendar calendar = Calendar.getInstance();
         int d = calendar.get(Calendar.DAY_OF_MONTH);
-        int m = calendar.get(Calendar.MONTH) + 1; // TODO: fix explanation below
-        int year = calendar.get(Calendar.YEAR) - 1; // API is discontinued so used the current month and day but last year
+        int m = calendar.get(Calendar.MONTH) + 1;
+        int year = calendar.get(Calendar.YEAR) - 1; // API is discontinued so used the current month and day but in last year
         String day, month;
         if (Integer.toString(d).length() == 1) {
             day = '0' + Integer.toString(d);
@@ -86,7 +90,6 @@ public class NetworkUtils {
         } else {
             month = Integer.toString(m);
         }
-
         String date = Integer.toString(year) + '-' + month + '-' + day;
 
         return date;

@@ -7,6 +7,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.LinkedList;
@@ -28,6 +29,7 @@ public class ReposListAdapter extends RecyclerView.Adapter <ReposListAdapter.Rep
         TextView ownerView;
         TextView descriptionView;
         TextView starsView;
+        ImageView icon;
         final ReposListAdapter adapter;
 
         public ReposViewHolder(View itemView, ReposListAdapter adapter) {
@@ -38,6 +40,7 @@ public class ReposListAdapter extends RecyclerView.Adapter <ReposListAdapter.Rep
             this.ownerView = (TextView) itemView.findViewById(R.id.owner);
             this.descriptionView = (TextView) itemView.findViewById(R.id.description);
             this.starsView = (TextView) itemView.findViewById(R.id.stars);
+            this.icon = (ImageView) itemView.findViewById(R.id.icon);
         }
     }
 
@@ -45,7 +48,7 @@ public class ReposListAdapter extends RecyclerView.Adapter <ReposListAdapter.Rep
     @Override
     public ReposListAdapter.ReposViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
         View itemView = inflater.from(viewGroup.getContext()).inflate(R.layout.repolist_item, viewGroup, false);
-        return new ReposViewHolder(itemView, this);
+            return new ReposViewHolder(itemView, this);
     }
 
     @Override
@@ -55,6 +58,7 @@ public class ReposListAdapter extends RecyclerView.Adapter <ReposListAdapter.Rep
         reposViewHolder.ownerView.setText(current.getOwner());
         reposViewHolder.descriptionView.setText(current.getDescription());
         reposViewHolder.starsView.setText(current.getStars());
+
     }
 
     @Override
