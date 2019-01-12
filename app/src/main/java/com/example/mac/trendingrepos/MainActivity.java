@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -22,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
     private ReposListAdapter adapter;
+    private Toolbar toolbar;
     private LinkedList <RepoInfo> reposList = new LinkedList <> ();
     String LOG_TAG = MainActivity.class.getSimpleName();
 
@@ -32,6 +34,8 @@ public class MainActivity extends AppCompatActivity {
 
         getRepos();
 
+        toolbar = findViewById(R.id.toolbar);
+        toolbar.setTitle(R.string.toolbar_text);
         recyclerView = findViewById(R.id.recyclerView);
         adapter = new ReposListAdapter(this, reposList);
         recyclerView.setAdapter(adapter);
